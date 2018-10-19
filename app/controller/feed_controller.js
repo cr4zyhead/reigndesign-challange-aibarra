@@ -6,11 +6,11 @@
  */
 
 const Feed = require('../models/feed-schema')
-var List = require('collections/list')
+const List = require('collections/list')
 
 function get (req, res) {
   return Feed
-    .find({ deleted_at: null })
+    .find({ is_deleted: false })
     .then(feeds => (
       res.status(200).json(feeds)
     ))
@@ -19,52 +19,52 @@ function get (req, res) {
     })
 }
 
-async function createFeed (req, res) {
+function insertFeeds (req, res) {
   let feeds = req.body.feeds
+  if (!Array.isArray(feeds)) feeds = [feeds]
+  let arr = formatFeed(feeds)
 
-  if (!Array.isArray(feeds)) {
-    feeds = [feeds]
-  }
-  let feedsArray = new List()
-  feeds.forEach(feed => {
-    const idf = feed.objectID
-
-    if (idf) {
-      const element = {
-        objectID: parseInt(idf, 10),
-        title: feed.title || feed.story_title,
-        url: feed.url || feed.story_url,
-        author: feed.author,
-        created_at: new Date(feed.created_at)
-      }
-      feedsArray.add(element)
-    }
-  })
-  feedsArray.map(feed => {
-    Feed.find({ objectID: feed.objectID })
-      .then(res => {
-        if (!res) {
-          const f = new Feed(
-            { objectID: feed.objectID,
-              title: feed.title,
-              url: feed.url,
-              author: feed.author,
-              created_at: feed.created_at })
-          f.save()
-            .then(r => {
-              console.log('saved')
-            })
-            .catch(e => {
-              console.log(e)
-            })
-        } else {
-          console.log('exist')
-        }
-      })
-      .catch(e => {
-        console.log(e)
-      })
-  })
+  Feed.insertMany(arr.toArray(), { ordered: false })
+    .then(results => res.status(201).json(results))
+    .catch(err => res.status(404).json(err.message))
 }
 
-module.exports = { get, createFeed }
+function formatFeed (feeds) {
+  let feedsFormatted = new List()
+  let x = Object.create(null)
+  try {
+    feeds.forEach(feed => {
+      x = {
+        objectID: feed.objectID,
+        title: feed.story_title || feed.title,
+        url: feed.story_url || feed.url || null,
+        author: feed.author,
+        created_at: new Date(feed.created_at),
+        is_deleted: false
+      }
+      feedsFormatted.add(x)
+    })
+  } catch (e) {
+    console.log('')
+  }
+
+  return feedsFormatted
+}
+
+async function deleteFeed (req, res) {
+  const id = req.params.id
+  const query = { objectID: id }
+
+  try {
+    const op = await Feed.findOneAndUpdate(query, { $set: { is_deleted: true } })
+    if (op) {
+      res.sendStatus(200).json({ message: 'success feed eliminated' })
+    } else {
+      res.sendStatus(401).json({ message: 'error not deleted' })
+    }
+  } catch (e) {
+    console.log('Error caught')
+  }
+}
+
+module.exports = { get, insertFeeds, deleteFeed }

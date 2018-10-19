@@ -8,7 +8,7 @@ async function getDataFromServer () {
     const hits = await res.data.hits
     await axios.post(process.env.API_URI_APP, { feeds: hits })
   } catch (e) {
-    Promise.reject(e)
+    console.log('error:' + e)
   }
 }
 module.exports = { getDataFromServer }

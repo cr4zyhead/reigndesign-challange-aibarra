@@ -20,14 +20,9 @@ const feedSchema= new Schema({
   created_at: {
     type: 'Date'
   },
-  delete_at: {
-    type: 'Date'
+  is_deleted: {
+    type: 'Boolean'
   }
 })
-
-feedSchema.methods.delete=function(){
-  this.delete_at=Date.now()
-  return this.save()
-}
 
 module.exports=mongoose.model('feed-schema',feedSchema)

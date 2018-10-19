@@ -3,8 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./app/bin/www",
-    "stn": "standard --fix ./app/**/*.js"
+    "start":"node ./app/bin/www",
+    "dev": "nodemon ./app/bin/www",
+    "stn": "standard --fix ./app/**/*.js",
+    "test": "mocha ./app/test/test.js"
+  },
+  "pre-commit": {
+    "run": "test"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -22,7 +27,9 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.4",
+    "pre-commit": "^1.2.2",
     "standard": "^12.0.1"
   }
 }

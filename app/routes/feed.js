@@ -5,6 +5,7 @@ const controller = require('../controller/feed_controller')
 /* GET home page. */
 
 router.get('/', controller.get)
-router.post('/', controller.createFeed)
+router.post('/', controller.insertFeeds)
+router.delete('/:id', controller.deleteFeed)
 
 module.exports = router
