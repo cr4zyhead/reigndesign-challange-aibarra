@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  #id
+    .card
+      .card-body
+        table.table
+          each feed in feeds
+              - var datetime = moment(feed.created_at).calendar(null, formatDate)
+              if feed.url
+                  tr(onclick="window.open('" + feed.url + "', '_blank');", class='cursor')
+                    th #{feed.title}
+                        span.author  -#{feed.author}-
+                    th #{datetime}
+                    th
+              else
+                  tr
+                      th #{feed.title}
+                      th #{datetime}

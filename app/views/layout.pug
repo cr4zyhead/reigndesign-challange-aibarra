@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title= title
+
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='/components/bootstrap/dist/css/bootstrap.css', rel='stylesheet')
+
+    script (src = '/components/bootstrap/dist/js/bootstrap.js')
+    script (src = '/javascripts/script.js')
+
+    header.jumbotron.jumbotron-fluid.text-white.bg-dark
+        .padding-header
+            h1.display-4= title
+            p.lead we <3 hacker news!
+
+    body
+
+    block content
+
+

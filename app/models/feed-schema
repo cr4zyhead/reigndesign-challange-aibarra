@@ -1,0 +1,33 @@
+const mongoose=require('mongoose')
+
+const { Schema }= mongoose
+
+const feedSchema= new Schema({
+  objectID: {
+    type: 'Number',
+    index: true,
+    unique:true
+  },
+  title: {
+    type: 'Mixed'
+  },
+  url: {
+    type: 'Mixed'
+  },
+  author: {
+    type: 'String'
+  },
+  created_at: {
+    type: 'Date'
+  },
+  delete_at: {
+    type: 'Date'
+  }
+})
+
+feedSchema.methods.delete=function(){
+  this.delete_at=Date.now()
+  return this.save()
+}
+
+module.exports=mongoose.model('feed-schema',feedSchema)

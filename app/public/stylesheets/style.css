@@ -1,0 +1,17 @@
+.padding-header{
+    padding-left: 20px;
+}
+.table tr{
+    background-color: #fff;
+    border: 1px #ccc ;
+    font-size: 13pt;
+}
+.author{
+    color: #999;
+}
+.table tr:hover{
+    background-color: #fafafa;
+}
+.cursor{
+    cursor: pointer;
+}
