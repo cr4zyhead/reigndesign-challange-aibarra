@@ -39,7 +39,7 @@ sudo chmod 0755 /data/db && sudo chown $USER /data/db
 
 And finally run mongo 
 ```
-sudo chmod 0755 /data/db && sudo chown $USER /data/db
+mongod
 ```
 
 Set up env variables

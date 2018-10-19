@@ -1,0 +1,17 @@
+{
+  "name": "reigndesign-challange-aibarra",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Aibarra <ibarra.alexis@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/cr4zyhead/reigndesign-challange-aibarra",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
