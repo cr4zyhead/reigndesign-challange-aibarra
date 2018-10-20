@@ -41,7 +41,12 @@ And finally run mongo
 ```
 mongod
 ```
-
+Clone and install dependencies 
+```
+https://github.com/cr4zyhead/reigndesign-challange-aibarra.git
+cd reigndesign-challange-aibarra
+npm install && bower install
+```
 Set up env variables
 ```
 DB_URI="mongodb://localhost/hnfeeds"
@@ -64,11 +69,8 @@ to run the test  execute the following command
 
 ```
 
-
-### And coding style tests
+### Coding style tests
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
-
-Explain what these tests test and why
 
 ```
 npm run stn
