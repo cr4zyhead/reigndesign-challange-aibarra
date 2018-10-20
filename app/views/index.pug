@@ -4,20 +4,23 @@ block content
     .card
       .card-body
         table.table #{maintable}
-          each feed in feeds
-              - var datetime = moment(feed.created_at).calendar(null, formatDate)
-              if feed.url
-                  tr(name= feed.objectID)
-                    th(onclick="window.open('" + feed.url + "', '_blank');", class='cursor') #{feed.title}
-                        span.author  -#{feed.author}-
-                    th #{datetime}
-                    th
-                      a(name= feed.objectID, onclick="deletedata(event, this);")
-                        div.icond
-              else
-                  tr(name= feed.objectID)
-                      th #{feed.title}
-                      th #{datetime}
-                      th
-                        a(name= feed.objectID, onclick="deletedata(event, this);")
-                          div.icond
+            if feeds.length>0
+              each feed in feeds
+                  - var datetime = moment(feed.created_at).calendar(null, formatDate)
+                  if feed.url
+                      tr(name= feed.objectID)
+                        th(onclick="window.open('" + feed.url + "', '_blank');", class='cursor') #{feed.title}
+                            span.author  -#{feed.author}-
+                        th #{datetime}
+                        th
+                          a(name= feed.objectID, onclick="deletedata(event, this);")
+                            div.icond
+                  else
+                      tr(name= feed.objectID)
+                          th #{feed.title}
+                          th #{datetime}
+                          th
+                            a(name= feed.objectID, onclick="deletedata(event, this);")
+                              div.icond
+            else
+                h4 there is no data to show

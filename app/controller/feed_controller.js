@@ -15,7 +15,7 @@ function get (req, res) {
       res.status(200).json(feeds)
     ))
     .catch(e => {
-      res.status(401).json({ message: 'not found', error: e })
+      res.status(404).json({ message: 'not found', error: e })
     })
 }
 
@@ -58,7 +58,7 @@ async function deleteFeed (req, res) {
   try {
     const op = await Feed.findOneAndUpdate(query, { $set: { is_deleted: true } })
     if (op) {
-      res.sendStatus(200).json({ message: 'success feed eliminated' })
+      res.sendStatus(200).json({ message: 'feed successfully deleted' })
     } else {
       res.sendStatus(401).json({ message: 'error not deleted' })
     }

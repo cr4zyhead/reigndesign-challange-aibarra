@@ -41,7 +41,7 @@ And finally run mongo
 ```
 mongod
 ```
-Clone and install dependencies 
+## Clone and install dependencies 
 ```
 https://github.com/cr4zyhead/reigndesign-challange-aibarra.git
 cd reigndesign-challange-aibarra
