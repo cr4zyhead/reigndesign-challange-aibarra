@@ -1,4 +1,3 @@
-/* eslint-env mocha */
 let chai = require('chai')
 let chaiHttp = require('chai-http')
 chai.should()
@@ -55,41 +54,26 @@ describe('/POST feed', () => {
       })
   })
 })
-/*
 
 describe('/DELETE/:id feed', () => {
   it('it should DELETE a feed given the id', (done) => {
-    let objectID = 1111111111
-    let title = 'test'
-    let url = 'test'
-    let author = 'test'
-    let createdAt = Date.now()
-    let isDeleted = false
-
-    let feed = new Feed({
-      objectID: parseInt(objectID, 10),
-      title: title,
-      url: url,
-      author: author,
-      created_at: createdAt,
-      is_deleted: isDeleted
+    let feedt = new Feed({
+      objectID: parseInt(111111, 10),
+      title: 'test',
+      url: 'test',
+      author: 'test',
+      created_at: Date.now(),
+      is_deleted: false
     })
-    feed
-      .save()
-      .then(() => {
-        chai.request(localhost)
-          .delete('/api/feeds/' + feed.objectId)
-          .send(feed)
-          .end((err, res) => {
-            if (err) {
-              console.log(err.stack)
-            }
-            res.should.have.status(200)
-            res.body.should.be.a('object')
-            res.body.should.have.property('message').eql('feed successfully deleted!')
-            done()
-          })
-      })
+    Feed.create((feedt, () => {
+      chai.request(localhost)
+        .delete('/api/feeds/' + feedt.objectID)
+        .end((err, res) => {
+          if (err) console.log(err.stack)
+          res.should.have.status(200)
+          res.should.be.a('Object')
+          done()
+        })
+    }))
   })
 })
-*/
