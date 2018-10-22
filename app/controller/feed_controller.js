@@ -63,7 +63,7 @@ async function deleteFeed (req, res) {
       res.sendStatus(401).json({ message: 'error not deleted' })
     }
   } catch (e) {
-    console.log('Error caught')
+
   }
 }
 

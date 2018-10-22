@@ -2,25 +2,26 @@ extends layout
 
 block content
     .card
-      .card-body
-        table.table #{maintable}
-            if feeds.length>0
-              each feed in feeds
-                  - var datetime = moment(feed.created_at).calendar(null, formatDate)
-                  if feed.url
-                      tr(name= feed.objectID)
-                        th(onclick="window.open('" + feed.url + "', '_blank');", class='cursor') #{feed.title}
-                            span.author  -#{feed.author}-
-                        th #{datetime}
-                        th
-                          a(name= feed.objectID, onclick="deletedata(event, this);")
-                            div.icond
-                  else
-                      tr(name= feed.objectID)
-                          th #{feed.title}
-                          th #{datetime}
-                          th
-                            a(name= feed.objectID, onclick="deletedata(event, this);")
-                              div.icond
-            else
-                h4 there is no data to show
+        .card-body
+            table.table #{maintable}
+                if feeds.length > 0
+                    each feed in feeds
+                        - var datetime = moment(feed.created_at).calendar(null, formatDate)
+                        if feed.url
+                            tr(name= feed.objectID, onmouseover='showButton(this);', onmouseout='hideButton(this);')
+                                th(onclick="window.open('" + feed.url + "', '_blank');", class='cursor') #{feed.title}
+                                    span.author  -#{feed.author}-
+                                th #{datetime}
+                                th(id=feed.objectID + 'b')
+                                    a(onclick="deleteData(event, this," + csrfToken + ");", class='thbutton')
+                                        div.icond
+                        else
+                            tr(name= feed.objectID, onmouseover='showButton(this);', onmouseout='hideButton(this);')
+                                th(class='cursor') #{feed.title}
+                                    span.author  -#{feed.author}-
+                                th #{datetime}
+                                th(id=feed.objectID + 'b')
+                                    a(onclick="deleteData(event, this," + csrfToken + ");", class='thbutton')
+                                        div.icond
+                else
+                    h4 there is no data to show

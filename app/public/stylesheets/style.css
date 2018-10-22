@@ -19,6 +19,10 @@
     width: 24px;
     height: 24px;
 }
+
+.thbutton {
+    visibility: hidden;
+}
 .icond{
     min-width: 24px;
     min-height: 24px;
